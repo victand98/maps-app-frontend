@@ -48,13 +48,15 @@ export const MapSection = () => {
   if (place.loading) return <div>Cargando...</div>;
 
   return (
-    <section className="flex flex-col items-center gap-3 py-4">
-      <Select
-        name="place-type-select"
-        label="Filtrar por"
-        options={[{ value: "TODOS", label: "Todos" }, ...placeTypeOptions]}
-        onChange={onChange}
-      />
+    <section className="h-screen flex flex-col gap-2 items-center">
+      <div className="px-4 pt-2 md:px-0">
+        <Select
+          name="place-type-select"
+          label="Filtrar por"
+          options={[{ value: "TODOS", label: "Todos" }, ...placeTypeOptions]}
+          onChange={onChange}
+        />
+      </div>
 
       <Map>
         <GeoJSON

@@ -12,7 +12,7 @@ const center = { lat: -3.992889222222222, lng: -79.21129461111111 };
 export const Map = (props) => {
   return (
     <MapContainer
-      style={{ height: "100vh", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
       center={center}
       zoom={15}
     >

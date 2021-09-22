@@ -13,8 +13,8 @@ export const Home = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <main className="max-h-screen">
       <MapSection />
-    </div>
+    </main>
   );
 };
