@@ -7,8 +7,10 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
 import App from "./App";
+import { ToastContainer } from "react-toastify";
 
 import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 let persistor = persistStore(store);
 
@@ -17,6 +19,18 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
+        <ToastContainer
+          position="top-right"
+          autoClose={7000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          limit={1}
+        />
       </PersistGate>
     </Provider>
   </React.StrictMode>,
