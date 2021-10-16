@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import L from "leaflet";
 import { GeoJSON } from "react-leaflet";
-import { Map, Select } from "../../components";
+import { LoaderViewport, Map, Select } from "../../components";
 import { useSelector } from "react-redux";
 import * as Icon from "../../components/Icon";
 
@@ -45,7 +45,7 @@ export const MapSection = () => {
     setPlaceTypeSelect(value);
   };
 
-  if (place.loading) return <div>Cargando...</div>;
+  if (place.loading) return <LoaderViewport title="Cargando Recursos..." />;
 
   return (
     <section className="h-screen flex flex-col gap-2 items-center">

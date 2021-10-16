@@ -10,16 +10,20 @@ import L from "leaflet";
 import "leaflet.offline";
 import * as Io from "react-icons/io";
 import { toast } from "react-toastify";
-import { locationErrorMessage } from "../../../helpers/utils";
+import { confirmSaveTiles, locationErrorMessage } from "../../../helpers/utils";
+import {
+  downloadFinish,
+  incrementProgress,
+  setTotal,
+} from "../../../features/download/downloadSlice";
+import { useDispatch } from "react-redux";
 
 const center = { lat: -3.9945, lng: -79.2012 };
 
 export const Map = (props) => {
   const [map, setMap] = useState();
-  // eslint-disable-next-line
-  const [progress, setProgress] = useState(0);
-  // eslint-disable-next-line
-  const [total, setTotal] = useState(0);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (map) {
@@ -42,14 +46,16 @@ export const Map = (props) => {
         confirm(layer, successcallback) {
           if (
             window.confirm(
-              `¿Desea descargar ${layer._tilesforSave.length} recursos del Mapa?`
+              `¿Desea descargar ${layer._tilesforSave.length} recursos de Mapas Offline?`
             )
           ) {
-            successcallback();
+            confirmSaveTiles(controlSaveTiles, layer);
           }
         },
         confirmRemoval(layer, successCallback) {
-          if (window.confirm("¿Eliminar todos los recursos descargados?")) {
+          if (
+            window.confirm("¿Eliminar todos los recursos Offline descargados?")
+          ) {
             successCallback();
           }
         },
@@ -65,18 +71,21 @@ export const Map = (props) => {
       let progress;
       tileLayerOffline.on("savestart", (e) => {
         progress = 0;
-        setTotal(e._tilesforSave.length);
+        dispatch(setTotal(e._tilesforSave.length));
       });
       tileLayerOffline.on("savetileend", () => {
         progress += 1;
-        setProgress(progress);
+        dispatch(incrementProgress(progress));
+      });
+      tileLayerOffline.on("savefinish", (e) => {
+        dispatch(downloadFinish());
       });
     }
-  }, [map]);
+  }, [map, dispatch]);
 
   return (
     <MapContainer
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100%", width: "100%", zIndex: 10 }}
       center={center}
       zoom={14}
       minZoom={13}
@@ -96,14 +105,13 @@ const LocationMarker = () => {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng);
-      console.log(`map.getZoom()`, map.getZoom());
     },
     locationerror(error) {
       toast.error(locationErrorMessage(error.code));
     },
   });
 
-  return position === null ? null : (
+  return !!map && position === null ? null : (
     <Marker position={position}>
       <Popup>Te encuentras aquí</Popup>
     </Marker>
