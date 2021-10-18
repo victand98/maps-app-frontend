@@ -1,7 +1,9 @@
+import * as TileManager from "leaflet.offline/src/TileManager";
+
 export const locationErrorMessage = (code) => {
   switch (code) {
     case 1:
-      return "No se ha podido acceder a su ubicación, procure que los permisos para acceder a su ubicación esten activados.";
+      return "No se ha podido acceder a su ubicación. Se necesita permiso para acceder a su ubicación.";
 
     default:
       return;
@@ -14,7 +16,6 @@ export const confirmSaveTiles = async (control, layer) => {
   await Promise.all(
     layer._tilesforSave.map(async (tile) => await loadTile(this$1, tile))
   );
-  this$1._baseLayer.fire("savefinish", this$1.status);
 };
 
 const loadTile = async (control, jtile) => {
@@ -23,7 +24,7 @@ const loadTile = async (control, jtile) => {
     let tile = jtile;
     let blob = await downloadTile(tile.url);
     self.status.lengthLoaded += 1;
-    self._saveTile(tile, blob);
+    saveTile(control, tile, blob);
     self._baseLayer.fire("loadtileend", self.status);
     if (self.status.lengthLoaded === self.status.lengthToBeSaved) {
       self._baseLayer.fire("loadend", self.status);
@@ -39,4 +40,23 @@ const downloadTile = async (tileUrl) => {
     throw new Error("Request failed with status " + response.statusText);
   }
   return response.blob();
+};
+
+const saveTile = (control, tileInfo, blob) => {
+  let self = control;
+  TileManager.saveTile(tileInfo, blob)
+    .then(() => {
+      self.status.lengthSaved += 1;
+      self._baseLayer.fire("savetileend", self.status);
+      if (
+        self.status.lengthSaved === self.status.lengthToBeSaved ||
+        self.status.lengthSaved === self.status.lengthLoaded
+      ) {
+        self._baseLayer.fire("saveend", self.status);
+        self.setStorageSize();
+      }
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 };

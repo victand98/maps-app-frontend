@@ -20,6 +20,7 @@ ReactDOM.render(
       <PersistGate loading={null} persistor={persistor}>
         <App />
         <ToastContainer
+          bodyClassName={() => "flex text-sm font-medium p-3"}
           position="top-right"
           autoClose={7000}
           hideProgressBar={false}
