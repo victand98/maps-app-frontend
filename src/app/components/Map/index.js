@@ -10,7 +10,8 @@ import L from "leaflet";
 import "leaflet.offline";
 import * as Io from "react-icons/io";
 import { toast } from "react-toastify";
-import { confirmSaveTiles, locationErrorMessage } from "../../../helpers/utils";
+import { locationErrorMessage } from "../../../helpers/utils";
+import { confirmSaveTiles } from "../../../helpers/maps";
 import {
   downloadFinish,
   incrementProgress,

@@ -10,15 +10,17 @@ export const MapSection = () => {
     type: "FeatureCollection",
     features: [],
   });
-  const [placeTypeSelect, setPlaceTypeSelect] = useState("TODOS");
+  const [placeTypeSelect, setPlaceTypeSelect] = useState({
+    value: "TODOS",
+    label: "Todos",
+  });
 
   const place = useSelector((state) => state.place);
-  const placeTypeOptions = useSelector((state) =>
-    state.placeType.entities.map((item) => ({
-      value: item._id,
-      label: `${item.name} - ${item.description}`,
-    }))
-  );
+  const placeType = useSelector((state) => state.placeType);
+  const placeTypeOptions = placeType.entities.map((item) => ({
+    value: item._id,
+    label: `${item.name} - ${item.description}`,
+  }));
 
   useEffect(() => {
     if (place.entities.length > 0) {
@@ -40,27 +42,25 @@ export const MapSection = () => {
     }
   }, [place.entities]);
 
-  const onChange = (e) => {
-    const { value } = e.target;
-    setPlaceTypeSelect(value);
-  };
-
-  if (place.loading) return <LoaderViewport title="Cargando Recursos..." />;
+  if (place.loading || placeType.loading)
+    return <LoaderViewport title="Cargando Recursos..." />;
 
   return (
     <section className="h-screen flex flex-col gap-2 items-center">
       <div className="px-4 pt-2 md:px-0">
-        <Select
-          name="place-type-select"
-          label="Filtrar por"
-          options={[{ value: "TODOS", label: "Todos" }, ...placeTypeOptions]}
-          onChange={onChange}
-        />
+        <div className="w-72">
+          <Select
+            name="place-type-select"
+            options={[{ value: "TODOS", label: "Todos" }, ...placeTypeOptions]}
+            onChange={setPlaceTypeSelect}
+            value={placeTypeSelect}
+          />
+        </div>
       </div>
 
       <Map>
         <GeoJSON
-          key={placeTypeSelect}
+          key={placeTypeSelect.value}
           data={placesGeojson}
           onEachFeature={(feature, layer) => {
             if (feature.properties && feature.properties.name) {
@@ -73,8 +73,8 @@ export const MapSection = () => {
             });
           }}
           filter={(feature) => {
-            if (placeTypeSelect !== "TODOS")
-              return feature.properties.placeType === placeTypeSelect;
+            if (placeTypeSelect.value !== "TODOS")
+              return feature.properties.placeType === placeTypeSelect.value;
             else return true;
           }}
         />
