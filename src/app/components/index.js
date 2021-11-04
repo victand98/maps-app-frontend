@@ -4,3 +4,6 @@ export * from "./Select";
 export * from "./Progress";
 export * from "./Dialog";
 export * from "./Spinner";
+export * from "./Form";
+export * from "./MapControl";
+export * from "./GeoJSON";

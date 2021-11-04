@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import placeReducer from "../features/place/placeSlice";
 import placeTypeReducer from "../features/placeType/placeTypeSlice";
 import downloadReducer from "../features/download/downloadSlice";
+import bikewayReducer from "../features/bikeway/bikewaySlice";
 
 const persistConfig = {
   key: "root",
@@ -22,9 +23,10 @@ const persistConfig = {
 };
 
 const reducers = combineReducers({
+  bikeway: bikewayReducer,
+  download: downloadReducer,
   place: placeReducer,
   placeType: placeTypeReducer,
-  download: downloadReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

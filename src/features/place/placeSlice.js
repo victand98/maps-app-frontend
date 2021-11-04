@@ -7,7 +7,7 @@ export const getPlaces = createAsyncThunk("place/getPlaces", async () => {
 });
 
 const initialState = {
-  loading: false,
+  loading: true,
   error: null,
   entities: [],
 };

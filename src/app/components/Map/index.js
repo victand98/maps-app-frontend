@@ -43,7 +43,7 @@ export const Map = (props) => {
 
       const controlSaveTiles = L.control.savetiles(tileLayerOffline, {
         zoomlevels: [13, 14, 15, 16],
-        position: "topright",
+        position: "topleft",
         confirm(layer, successcallback) {
           if (
             window.confirm(
@@ -136,8 +136,9 @@ const ControlLocation = () => {
     <div className="leaflet-bottom leaflet-right">
       <div className="leaflet-control">
         <button
-          className="outline-none inline-flex items-center justify-center w-10 h-10 mr-2 text-gray-700 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-300 mb-5"
+          className="outline-none inline-flex items-center justify-center w-12 h-12 md:w-10 md:h-10 mr-2 text-gray-700 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-300 mb-16"
           onClick={findLocation}
+          title="Localizar mi ubicación"
         >
           <Io.IoMdLocate className="fill-current w-5 h-5" />
         </button>

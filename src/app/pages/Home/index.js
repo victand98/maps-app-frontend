@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { getBikeways } from "../../../features/bikeway/bikewaySlice";
 import { getPlaces } from "../../../features/place/placeSlice";
 import { getPlaceTypes } from "../../../features/placeType/placeTypeSlice";
 import { DownloadSection } from "./DownloadSection";
@@ -10,6 +11,7 @@ export const Home = () => {
 
   useEffect(() => {
     dispatch(getPlaces());
+    dispatch(getBikeways());
     dispatch(getPlaceTypes());
   }, [dispatch]);
 

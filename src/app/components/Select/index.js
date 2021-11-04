@@ -1,12 +1,18 @@
 import React, { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import * as Hi from "react-icons/hi";
+import classNames from "classnames";
 
-export const Select = ({ options, onChange, value, ...rest }) => {
+export const Select = ({ options, onChange, value, disabled, ...rest }) => {
+  const ListBoxButtonClass = classNames(
+    "relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm",
+    { "opacity-75": disabled }
+  );
+
   return (
-    <Listbox value={value} onChange={onChange} {...rest}>
+    <Listbox value={value} onChange={onChange} disabled={disabled} {...rest}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
+        <Listbox.Button className={ListBoxButtonClass}>
           <span className="block truncate">{value.label}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <Hi.HiOutlineSelector
@@ -36,6 +42,13 @@ export const Select = ({ options, onChange, value, ...rest }) => {
                       } block truncate`}
                     >
                       {option.label}
+                    </span>
+                    <span
+                      className={`${
+                        selected ? "font-medium" : "font-normal"
+                      } block truncate text-xs text-gray-500`}
+                    >
+                      {option.description}
                     </span>
                     {selected ? (
                       <span
