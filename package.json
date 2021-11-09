@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@headlessui/react": "^1.4.1",
+    "@react-leaflet/core": "^1.1.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -12,6 +13,7 @@
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
     "leaflet": "^1.7.1",
+    "leaflet-routing-machine": "^3.2.12",
     "leaflet.offline": "^2.0.0-beta.3",
     "object-hash": "^2.2.0",
     "react": "^17.0.2",

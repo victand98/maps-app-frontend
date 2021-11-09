@@ -4,7 +4,8 @@ import {
   BikewayGeoJSON,
   LoaderViewport,
   Map,
-  PlaceControl,
+  PlaceItem,
+  RoutingMachine,
 } from "../../components";
 
 export const MapSection = () => {
@@ -17,8 +18,9 @@ export const MapSection = () => {
   return (
     <section className="h-screen">
       <Map>
-        <PlaceControl />
+        <PlaceItem />
         <BikewayGeoJSON />
+        <RoutingMachine position="bottomright" />
       </Map>
     </section>
   );

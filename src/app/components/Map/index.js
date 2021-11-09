@@ -1,14 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  useMap,
-  useMapEvents,
-} from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet.offline";
-import * as Io from "react-icons/io";
 import { toast } from "react-toastify";
 import { locationErrorMessage } from "../../../helpers/utils";
 import { confirmSaveTiles } from "../../../helpers/maps";
@@ -18,6 +11,7 @@ import {
   setTotal,
 } from "../../../features/download/downloadSlice";
 import { useDispatch } from "react-redux";
+import { LocateControl } from "..";
 
 const center = { lat: -3.9945, lng: -79.2012 };
 
@@ -97,7 +91,7 @@ export const Map = (props) => {
     >
       {props.children}
       <LocationMarker />
-      <ControlLocation />
+      <LocateControl />
     </MapContainer>
   );
 };
@@ -118,31 +112,5 @@ const LocationMarker = () => {
     <Marker position={position}>
       <Popup>Te encuentras aquí</Popup>
     </Marker>
-  );
-};
-
-const ControlLocation = () => {
-  const map = useMap();
-
-  const findLocation = useCallback(() => {
-    map.locate({ watch: true });
-  }, [map]);
-
-  useEffect(() => {
-    findLocation();
-  }, [findLocation]);
-
-  return (
-    <div className="leaflet-bottom leaflet-right">
-      <div className="leaflet-control">
-        <button
-          className="outline-none inline-flex items-center justify-center w-12 h-12 md:w-10 md:h-10 mr-2 text-gray-700 transition-colors duration-150 bg-gray-200 rounded-full focus:shadow-outline hover:bg-blue-300 mb-16"
-          onClick={findLocation}
-          title="Localizar mi ubicación"
-        >
-          <Io.IoMdLocate className="fill-current w-5 h-5" />
-        </button>
-      </div>
-    </div>
   );
 };
