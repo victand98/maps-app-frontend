@@ -22,7 +22,7 @@ export const PlaceGeoJSON = ({ placeTypeSelect }) => {
             type: "Feature",
             properties: {
               name,
-              placeType: placeType._id,
+              placeType: placeType,
               icon: placeType.icon,
             },
             geometry: location,
@@ -40,6 +40,11 @@ export const PlaceGeoJSON = ({ placeTypeSelect }) => {
         if (feature.properties && feature.properties.name) {
           layer.bindPopup(feature.properties.name);
         }
+        layer.on({
+          click: (e) => {
+            console.log(e, feature);
+          },
+        });
       }}
       pointToLayer={(feature, latlng) => {
         return L.marker(latlng, {
@@ -48,7 +53,7 @@ export const PlaceGeoJSON = ({ placeTypeSelect }) => {
       }}
       filter={(feature) => {
         if (placeTypeSelect.value !== "TODOS")
-          return feature.properties.placeType === placeTypeSelect.value;
+          return feature.properties.placeType._id === placeTypeSelect.value;
         else return true;
       }}
     />

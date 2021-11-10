@@ -15,6 +15,11 @@ const point2 = {
 
 const createRoutingMachineLayer = (props) => {
   const instance = L.Routing.control({
+    router: L.routing.osrmv1({
+      serviceUrl: "http://router.project-osrm.org/route/v1",
+      profile: "cycling",
+      language: "es",
+    }),
     waypoints: [L.latLng(point1), L.latLng(point2)],
     lineOptions: {
       styles: [{ color: "#ec6f88", weight: 4 }],
