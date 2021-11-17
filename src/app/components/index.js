@@ -8,3 +8,4 @@ export * from "./MapItem";
 export * from "./MapControl";
 export * from "./GeoJSON";
 export * from "./RoutingMachine";
+export * from "./Button";

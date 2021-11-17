@@ -16,7 +16,7 @@ const point2 = {
 const createRoutingMachineLayer = (props) => {
   const instance = L.Routing.control({
     router: L.routing.osrmv1({
-      serviceUrl: "http://router.project-osrm.org/route/v1",
+      serviceUrl: "https://router.project-osrm.org/route/v1",
       profile: "cycling",
       language: "es",
     }),
