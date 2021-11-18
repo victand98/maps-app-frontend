@@ -12,23 +12,21 @@ export const DownloadSection = () => {
     if (downloading) setIsOpen(true);
   }, [downloading]);
 
+  const onClose = () => {
+    if (downloading) return;
+    setIsOpen(false);
+  };
+
   return (
     <Modal
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      onClose={onClose}
       title="Descarga de Recursos"
       cannotClose={downloading}
     >
       <Progress badgeText="Mapas Offline" advance={(progress * 100) / total} />
       <div className="mt-4">
-        <Button
-          onClick={() => {
-            if (downloading) return;
-            setIsOpen(false);
-          }}
-        >
-          Cerrar
-        </Button>
+        <Button onClick={onClose}>Cerrar</Button>
       </div>
     </Modal>
   );

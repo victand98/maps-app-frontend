@@ -3,6 +3,7 @@ import ParkImg from "../../../assets/img/park.svg";
 import StreamImg from "../../../assets/img/lake.svg";
 import ParkingImg from "../../../assets/img/parking.svg";
 import MarkerShadow from "../../../assets/img/marker-shadow.png";
+import * as Md from "react-icons/md";
 import "./Icon.style.css";
 
 export const park = new L.divIcon({
@@ -34,3 +35,17 @@ export const parking = new L.divIcon({
   shadowUrl: MarkerShadow,
   shadowAnchor: [13, 28],
 });
+
+export const ParkIcon = (props) => (
+  <img src={ParkImg} alt="parque" {...props} />
+);
+
+export const StreamIcon = (props) => (
+  <img src={StreamImg} alt="quebrada" {...props} />
+);
+
+export const ParkingIcon = (props) => (
+  <img src={ParkingImg} alt="estacionamiento" {...props} />
+);
+
+export const BikewayIcon = (props) => <Md.MdDirectionsBike {...props} />;

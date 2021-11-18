@@ -12,6 +12,7 @@ import {
 } from "../../../features/download/downloadSlice";
 import { useDispatch } from "react-redux";
 import { LocateControl } from "..";
+import { setOrigin } from "../../../features/routing/routingSlice";
 
 const center = { lat: -3.9945, lng: -79.2012 };
 
@@ -29,14 +30,14 @@ export const Map = (props) => {
             '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
           subdomains: "abc",
           minZoom: 13,
-          maxZoom: 16,
+          maxZoom: 17,
         }
       );
 
       tileLayerOffline.addTo(map);
 
       const controlSaveTiles = L.control.savetiles(tileLayerOffline, {
-        zoomlevels: [13, 14, 15, 16],
+        zoomlevels: [13, 14, 15, 16, 17],
         position: "topleft",
         confirm(layer, successcallback) {
           if (
@@ -86,7 +87,7 @@ export const Map = (props) => {
       center={center}
       zoom={14}
       minZoom={13}
-      maxZoom={16}
+      maxZoom={17}
       whenCreated={setMap}
     >
       {props.children}
@@ -99,9 +100,12 @@ export const Map = (props) => {
 const LocationMarker = () => {
   const [position, setPosition] = useState(null);
 
+  const dispatch = useDispatch();
+
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng);
+      dispatch(setOrigin({ lat: e.latlng.lat, lng: e.latlng.lng }));
     },
     locationerror(error) {
       toast.error(locationErrorMessage(error.code));

@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GeoJSON } from "react-leaflet";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import hash from "object-hash";
+import { setCurrentPoint } from "../../../features/routing/routingSlice";
+
+let myStyle = {
+  color: "#05A8AA",
+  weight: 6,
+};
 
 export const BikewayGeoJSON = () => {
   const [bikewaysGeojson, setBikewaysGeojson] = useState({
@@ -10,6 +16,8 @@ export const BikewayGeoJSON = () => {
   });
 
   const bikeway = useSelector((state) => state.bikeway);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (bikeway.entities.length > 0) {
@@ -37,7 +45,21 @@ export const BikewayGeoJSON = () => {
         if (feature.properties && feature.properties.name) {
           layer.bindPopup(feature.properties.name);
         }
+        layer.on({
+          click: (e) => {
+            dispatch(
+              setCurrentPoint({
+                icon: "bikeway",
+                name: feature.properties.name,
+                description: "Ciclovía",
+                isOpen: true,
+                latlng: { lat: e.latlng.lat, lng: e.latlng.lng },
+              })
+            );
+          },
+        });
       }}
+      style={myStyle}
     />
   );
 };
