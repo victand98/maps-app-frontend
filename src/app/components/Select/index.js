@@ -33,20 +33,20 @@ export const Select = ({ options, onChange, value, disabled, ...rest }) => {
                 {({ selected, active }) => (
                   <li
                     className={`${
-                      active ? "text-purple-900 bg-amber-100" : "text-gray-900"
+                      active ? "text-purple-900 bg-gray-100" : "text-gray-900"
                     } cursor-default select-none relative py-2 pl-10 pr-4`}
                   >
                     <span
                       className={`${
                         selected ? "font-medium" : "font-normal"
-                      } block truncate`}
+                      } block truncate text-xs md:text-base`}
                     >
                       {option.label}
                     </span>
                     <span
                       className={`${
                         selected ? "font-medium" : "font-normal"
-                      } block truncate text-xs text-gray-500`}
+                      } hidden md:block truncate text-xs text-gray-500`}
                     >
                       {option.description}
                     </span>

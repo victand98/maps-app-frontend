@@ -58,7 +58,6 @@ const InformationDialog = () => {
 
   const onConfirmClick = () => {
     onClose();
-    console.log(`latlng`, latlng);
     dispatch(setDestination(latlng));
   };
 
