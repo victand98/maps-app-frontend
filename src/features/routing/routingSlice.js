@@ -8,11 +8,17 @@ const initialState = {
     isOpen: false,
     latlng: { lat: null, lng: null },
   },
-  origin: {
-    lat: null,
-    lng: null,
+  waypoints: {
+    origin: {
+      lat: null,
+      lng: null,
+    },
+    destination: {
+      lat: null,
+      lng: null,
+    },
   },
-  destination: {
+  currentLocation: {
     lat: null,
     lng: null,
   },
@@ -28,16 +34,16 @@ const routingSlice = createSlice({
     setClose: (state, action) => {
       state.currentPoint.isOpen = false;
     },
-    setDestination: (state, action) => {
-      state.destination = action.payload;
+    setWaypoints: (state, action) => {
+      state.waypoints = action.payload;
     },
-    setOrigin: (state, action) => {
-      state.origin = action.payload;
+    setCurrentLocation: (state, action) => {
+      state.currentLocation = action.payload;
     },
   },
 });
 
-export const { setCurrentPoint, setClose, setDestination, setOrigin } =
+export const { setCurrentPoint, setClose, setWaypoints, setCurrentLocation } =
   routingSlice.actions;
 
 export default routingSlice.reducer;

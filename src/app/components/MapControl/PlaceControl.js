@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import reactDom from "react-dom";
 import { useSelector } from "react-redux";
 import L from "leaflet";
@@ -12,17 +12,23 @@ export const PlaceControl = ({
 }) => {
   const context = useLeafletContext();
   const placeType = useSelector((state) => state.placeType);
-  const placeTypeOptions = placeType.entities.map((item) => ({
-    value: item._id,
-    label: item.name,
-    description: item.description,
-  }));
+
+  const placeTypeOptions = useMemo(
+    () => [
+      { value: "TODOS", label: "Todos" },
+      ...placeType.entities.map((item) => ({
+        value: item._id,
+        label: item.name,
+        description: item.description,
+      })),
+    ],
+    [placeType.entities]
+  );
 
   const jsx = (
     <div className="w-36 md:w-72">
       <Select
-        name="place-type-select"
-        options={[{ value: "TODOS", label: "Todos" }, ...placeTypeOptions]}
+        options={placeTypeOptions}
         onChange={setPlaceTypeSelect}
         value={placeTypeSelect}
         disabled={placeType.loading}

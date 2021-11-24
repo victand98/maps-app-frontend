@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setClose,
-  setDestination,
-} from "../../../features/routing/routingSlice";
+import { toast } from "react-toastify";
+import { setClose, setWaypoints } from "../../../features/routing/routingSlice";
+import { locationErrorMessage } from "../../../helpers/utils";
 import {
   BikewayGeoJSON,
   BikewayIcon,
@@ -49,6 +48,7 @@ const InformationDialog = () => {
   const { isOpen, icon, latlng, ...rest } = useSelector(
     (state) => state.routing.currentPoint
   );
+  const currentLocation = useSelector((state) => state.routing.currentLocation);
 
   const dispatch = useDispatch();
 
@@ -58,7 +58,13 @@ const InformationDialog = () => {
 
   const onConfirmClick = () => {
     onClose();
-    dispatch(setDestination(latlng));
+    if (currentLocation.lat && currentLocation.lng) {
+      const waypoints = {
+        origin: currentLocation,
+        destination: latlng,
+      };
+      dispatch(setWaypoints(waypoints));
+    } else toast.error(locationErrorMessage(1));
   };
 
   return (

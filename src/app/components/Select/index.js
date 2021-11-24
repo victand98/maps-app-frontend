@@ -21,14 +21,15 @@ export const Select = ({ options, onChange, value, disabled, ...rest }) => {
             />
           </span>
         </Listbox.Button>
+
         <Transition
           as={Fragment}
           leave="transition ease-in duration-100"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute z-30 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {options.map((option, key) => (
+          <Listbox.Options className="absolute z-30 w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {options.map((option) => (
               <Listbox.Option key={option.value} value={option} as={Fragment}>
                 {({ selected, active }) => (
                   <li
@@ -43,6 +44,7 @@ export const Select = ({ options, onChange, value, disabled, ...rest }) => {
                     >
                       {option.label}
                     </span>
+
                     <span
                       className={`${
                         selected ? "font-medium" : "font-normal"
@@ -50,6 +52,7 @@ export const Select = ({ options, onChange, value, disabled, ...rest }) => {
                     >
                       {option.description}
                     </span>
+
                     {selected ? (
                       <span
                         className={`${

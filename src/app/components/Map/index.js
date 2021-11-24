@@ -12,7 +12,7 @@ import {
 } from "../../../features/download/downloadSlice";
 import { useDispatch } from "react-redux";
 import { LocateControl } from "..";
-import { setOrigin } from "../../../features/routing/routingSlice";
+import { setCurrentLocation } from "../../../features/routing/routingSlice";
 
 const center = { lat: -3.9945, lng: -79.2012 };
 
@@ -105,7 +105,7 @@ const LocationMarker = () => {
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng);
-      dispatch(setOrigin({ lat: e.latlng.lat, lng: e.latlng.lng }));
+      dispatch(setCurrentLocation({ lat: e.latlng.lat, lng: e.latlng.lng }));
     },
     locationerror(error) {
       toast.error(locationErrorMessage(error.code));
