@@ -15,7 +15,9 @@ import {
   PlaceItem,
   RoutingMachine,
   StreamIcon,
+  TourControl,
 } from "../../components";
+import steps from "./home.tour";
 
 export const MapSection = () => {
   const placeLoading = useSelector((state) => state.place.loading);
@@ -30,6 +32,7 @@ export const MapSection = () => {
         <PlaceItem />
         <BikewayGeoJSON />
         <RoutingMachine position="bottomright" />
+        <TourControl steps={steps} />
       </Map>
 
       <InformationDialog />

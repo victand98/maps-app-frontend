@@ -6,3 +6,12 @@ export const POSITION_CLASSES = {
   topleft: "leaflet-top leaflet-left",
   topright: "leaflet-top leaflet-right",
 };
+
+export const TOUR_LOCALE = {
+  back: "Regresar",
+  close: "Cerrar",
+  last: "Finalizar",
+  next: "Continuar",
+  open: "Abrir",
+  skip: "Saltar",
+};

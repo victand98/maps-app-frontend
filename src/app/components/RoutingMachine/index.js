@@ -34,6 +34,7 @@ export const RoutingMachine = (props) => {
 
   instance.on("routingstart", (e) => {
     console.log(`routingstart`, e);
+    instance.show();
   });
 
   instance.on("routesfound", (e) => {

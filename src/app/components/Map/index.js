@@ -114,7 +114,7 @@ const LocationMarker = () => {
 
   return !!map && position === null ? null : (
     <Marker position={position}>
-      <Popup>Te encuentras aquí</Popup>
+      <Popup className="current-location">Te encuentras aquí</Popup>
     </Marker>
   );
 };

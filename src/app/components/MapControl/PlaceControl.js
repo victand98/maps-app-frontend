@@ -28,6 +28,7 @@ export const PlaceControl = ({
   const jsx = (
     <div className="w-36 md:w-72">
       <Select
+        className="place-select"
         options={placeTypeOptions}
         onChange={setPlaceTypeSelect}
         value={placeTypeSelect}

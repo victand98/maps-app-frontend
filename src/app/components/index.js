@@ -10,3 +10,4 @@ export * from "./GeoJSON";
 export * from "./RoutingMachine";
 export * from "./Button";
 export * from "./Card";
+export * from "./Tour";
