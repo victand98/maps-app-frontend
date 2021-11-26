@@ -17,9 +17,9 @@ const TourControlLayer = ({ position, ...rest }) => {
   return instance;
 };
 
-const TourMapButton = ({ steps }) => {
+const TourMapButton = (props) => {
   return (
-    <Tour steps={steps} continuous={true}>
+    <Tour {...props}>
       <button
         className="tour-control outline-none inline-flex items-center justify-center w-12 h-12 md:w-10 md:h-10 text-gray-700 transition-colors duration-150 bg-white rounded-full focus:shadow-outline hover:bg-gray-200 border-gray-500 shadow-md"
         title="Guía de uso"

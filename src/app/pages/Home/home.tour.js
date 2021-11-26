@@ -6,7 +6,7 @@ const steps = [
   {
     target: "a.savetiles",
     content:
-      "También puedes Descargar los mapas para utlizarlos en modo Offline. Antes no olvides ajustar la pantalla al area que deseas decargar.",
+      "Puedes Descargar áreas del Mapa para utilizarlos en modo Offline. Es importante que no olvides ajustar la pantalla de tu dispositivo al área que deseas descargar.",
   },
   {
     target: "a.rmtiles",
@@ -15,21 +15,23 @@ const steps = [
   },
   {
     target: ".place-select",
-    content: "Puedes filtrar los lugares marcados en el mapa.",
+    content:
+      "Filtra los lugares marcados en el mapa de acuerdo a tu preferencia. Por defecto se muestran Todos.",
   },
   {
     target: ".leaflet-container",
     content:
-      "Pulsa un marcador del mapa para obtener más información del lugar.",
+      "Pulsando un marcador o una ciclovía del mapa obtendrás más información del lugar.",
   },
   {
     target: ".locate-control",
-    content: "Utiliza este botón para marcar tu ubicación en el mapa.",
+    content:
+      "Utiliza este botón para marcar tu ubicación en el mapa. Recuerda activar el GPS de tu dispositivo.",
   },
   {
     target: ".tour-control",
     content:
-      "Puedes volver a realizar esta guía rápida cada vez que quieras pulsando aquí",
+      "Siempre que lo necesites podrás volver a realizar esta guía rápida pulsando aquí.",
   },
 ];
 

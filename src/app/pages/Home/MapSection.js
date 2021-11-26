@@ -29,10 +29,14 @@ export const MapSection = () => {
   return (
     <section className="h-screen">
       <Map>
+        <TourControl
+          steps={steps}
+          disableOverlayClose={true}
+          storageItem="mainTour"
+        />
         <PlaceItem />
         <BikewayGeoJSON />
         <RoutingMachine position="bottomright" />
-        <TourControl steps={steps} />
       </Map>
 
       <InformationDialog />

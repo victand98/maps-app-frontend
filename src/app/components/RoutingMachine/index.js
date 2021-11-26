@@ -29,6 +29,7 @@ export const RoutingMachine = (props) => {
     showAlternatives: false,
     language: "es",
     createMarker: () => false,
+    collapseBtnClass: "leaflet-routing-collapse-btn cursor-pointer",
     ...props,
   });
 

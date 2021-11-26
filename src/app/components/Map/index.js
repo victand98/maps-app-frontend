@@ -91,8 +91,8 @@ export const Map = (props) => {
       whenCreated={setMap}
     >
       {props.children}
-      <LocationMarker />
       <LocateControl />
+      <LocationMarker />
     </MapContainer>
   );
 };
